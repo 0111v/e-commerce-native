@@ -3,7 +3,7 @@ import { Pressable, Text, View } from 'react-native'
 import { useUserStore } from '../../stores/useUserStore'
 
 export default function Account() {
-  const { isLoggedIn, token, logout } = useUserStore()
+  const { user, logout } = useUserStore()
   const router = useRouter()
 
   const handleLogout = () => {
@@ -15,13 +15,24 @@ export default function Account() {
     router.push('/login')
   }
 
+  const handleAdmin = () => {
+    router.push('/admin')
+  }
+
   return (
     <View className="flex-1 justify-center items-center px-6 bg-white">
       <Text className="text-2xl font-bold mb-6">Minha Conta</Text>
 
-      {isLoggedIn ? (
+      {user ? (
         <>
-          <Text className="text-gray-600 mb-4">Token: {token.slice(0, 16)}...</Text>
+          {user?.role === 'admin' && 
+            <Pressable
+              onPress={handleAdmin}
+              className="bg-blue-600 px-8 py-3 rounded mb-5"
+            >
+              <Text className="text-white font-semibold">Admin Page</Text>
+            </Pressable>
+          }
           <Pressable
             onPress={handleLogout}
             className="bg-red-600 px-6 py-2 rounded"

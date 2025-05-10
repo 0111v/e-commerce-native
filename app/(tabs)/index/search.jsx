@@ -4,17 +4,20 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import ProductCard from '../../../components/ProductCard'
 import SearchBar from '../../../components/SearchBar'
 import { useProductStore } from '../../../stores/useProductStore'
+import { useSearchStore } from '../../../stores/useSearchStore'
 
 
-export default function NewsPage() {
-  const { products, getProductsByQuery } = useProductStore()
+export default function SearchPage() {
+  const { products } = useProductStore()
+  const { search, getAllProducts } = useSearchStore()
 
   useEffect(() => {
     const fetchProducts = async () => {
-      await getProductsByQuery('')
+      await getAllProducts()
     }
     fetchProducts()
   }, [])
+
 
   return (
     <SafeAreaView className='flex-1' edges={['right', 'top', 'left']}>
@@ -23,7 +26,7 @@ export default function NewsPage() {
       {/* <Text className="text-3xl font-bold text-center mb-4">Coleção Masculina</Text> */}
 
       <FlatList
-        data={products}
+        data={products.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()))}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => <ProductCard product={item} />}
         contentContainerStyle={{ gap: 16, paddingBottom: 24 }}

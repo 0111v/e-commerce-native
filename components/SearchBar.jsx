@@ -1,15 +1,19 @@
 import { useRouter } from 'expo-router'
 import { Search } from 'lucide-react-native'
 import { Pressable, TextInput, View } from 'react-native'
+import { useProductStore } from '../stores/useProductStore'
 import { useSearchStore } from '../stores/useSearchStore'
+
 
 export default function SearchBar() {
   const { search, setSearch } = useSearchStore()
   const router = useRouter()
+  const { getAllProducts } = useProductStore()
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (search.trim()) {
-      router.push('/news')
+      await getAllProducts()
+      router.push('/search')
     }
   }
 

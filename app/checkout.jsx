@@ -22,7 +22,6 @@ export default function Checkout() {
     router.replace('/')
   }
 
-  /* ---------- empty cart ---------- */
   if (cart.length === 0) {
     return (
       <View className="flex-1 justify-center items-center px-6">
@@ -39,7 +38,6 @@ export default function Checkout() {
     )
   }
 
-  /* ---------- checkout view ---------- */
   return (
         <SafeAreaView className='flex-1' edges={['right', 'top', 'left']}>
           <ScrollView className="flex-1 bg-white px-4 pt-6">
