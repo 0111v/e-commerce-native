@@ -1,45 +1,98 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { Tabs } from 'expo-router'
+import { Home, User } from 'lucide-react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import CartTabIcon from '../../components/cartIcon'
+import "../../global.css"
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function TabsLayout() {
+  const insets = useSafeAreaInsets()
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+        tabBarStyle: {
+          backgroundColor: 'white',
+          borderTopColor: '#ccc',
+          height: 60 + insets.bottom, // add safe area at the bottom ✅
+          paddingBottom: insets.bottom, // push icons up
+          paddingTop: 8,
+        },
+        tabBarActiveTintColor: 'black',
+        tabBarLabelStyle: {
+          fontSize: 12,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Início',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="cart"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Carrinho',
+          tabBarIcon: ({ color, size }) => <CartTabIcon color={color} size={size} />,
+        }}
+      />
+      <Tabs.Screen
+        name="account"
+        options={{
+          title: 'Conta',
+          tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
         }}
       />
     </Tabs>
-  );
+  )
 }
+
+
+// import { Stack } from "expo-router";
+// import { Tabs } from 'expo-router'
+// import { Home, ShoppingCart, User } from 'lucide-react-native'
+// import "../../global.css"
+
+// export default function Layout() {
+//   return (
+//     <Tabs
+//       screenOptions={{
+//         tabBarActiveTintColor: 'black',
+//         tabBarStyle: {
+//           backgroundColor: 'white',
+//           borderTopColor: '#ccc',
+//           height: 60,
+//         },
+//         tabBarLabelStyle: {
+//           fontSize: 12,
+//         },
+//       }}
+//     >
+//       <Tabs.Screen
+//         name="index"
+//         options={{
+//           title: 'Início',
+//           headerShown: false,
+//           tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
+//         }}
+//       />
+//       <Tabs.Screen
+//         name="cart"
+//         options={{
+//           title: 'Carrinho',
+//           tabBarIcon: ({ color, size }) => <ShoppingCart size={size} color={color} />,
+//         }}
+//       />
+//       <Tabs.Screen
+//         name="account"
+//         options={{
+//           title: 'Conta',
+//           tabBarIcon: ({ color, size }) => <User size={size} color={color} />,
+//         }}
+//       />
+//     </Tabs>
+//   )
+// }
