@@ -34,7 +34,7 @@ export default function Login() {
             placeholder="E-mail"
             value={email}
             onChangeText={setEmail}
-            className="border px-4 py-2 mb-4 rounded"
+            className="border px-4 py-3 mb-4 rounded"
             autoCapitalize="none"
           />
 
@@ -43,10 +43,10 @@ export default function Login() {
             value={password}
             onChangeText={setPassword}
             secureTextEntry
-            className="border px-4 py-2 mb-6 rounded"
+            className="border px-4 py-3 mb-6 rounded"
           />
 
-          <Pressable onPress={handle} className="bg-black py-3 rounded">
+          <Pressable onPress={handle} className="bg-black py-5 rounded">
             <Text className="text-white text-center font-semibold">Entrar</Text>
           </Pressable>
 

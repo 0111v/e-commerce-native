@@ -28,14 +28,14 @@ export default function Account() {
           {user?.role === 'admin' && 
             <Pressable
               onPress={handleAdmin}
-              className="bg-blue-600 px-8 py-3 rounded mb-5"
+              className="bg-blue-600 px-10 py-4 rounded mb-5"
             >
               <Text className="text-white font-semibold">Admin Page</Text>
             </Pressable>
           }
           <Pressable
             onPress={handleLogout}
-            className="bg-red-600 px-6 py-2 rounded"
+            className="bg-red-600 px-8 py-3 rounded"
           >
             <Text className="text-white font-semibold">Sair</Text>
           </Pressable>
